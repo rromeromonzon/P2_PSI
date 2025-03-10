@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -81,7 +82,7 @@ import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://alumnodb:alumnodb@localhost:5432/psi_p2',
+        default='postgres://p2_PSI_persona_owner:npg_WBAKG1loHL9x@ep-flat-morning-a8v4srch-pooler.eastus2.azure.neon.tech/p2_PSI_persona',
         conn_max_age=500
     )
 }
@@ -90,10 +91,10 @@ if not DATABASES['default']:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'psi_p2',
-            'USER': 'alumnodb',
-            'PASSWORD': 'alumnodb',
-            'HOST': 'localhost',
+            'NAME': os.getenv('PGDATABASE', 'p2_PSI_persona'),
+            'USER': os.getenv('PGUSER', 'p2_PSI_persona_owner'),
+            'PASSWORD': os.getenv('PGPASSWORD', 'npg_WBAKG1loHL9x'),
+            'HOST': os.getenv('PGHOST', 'ep-flat-morning-a8v4srch-pooler.eastus2.azure.neon.tech'),
             'PORT': '5432',
         }
     }
