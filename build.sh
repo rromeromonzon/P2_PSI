@@ -66,4 +66,4 @@ npm run dev > vue.log 2>&1 &
 
 # Finalización
 echo "Todo configurado. El proyecto está corriendo en local."
-echo "Accede a Django en http://127.0.0.1:8000 y a Vue.js en http://localhost:8080"
+echo "Accede a Django en http://127.0.0.1:8001 y a Vue.js en http://localhost:5173"
