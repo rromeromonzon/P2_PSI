@@ -19,6 +19,7 @@ context("Delete persona", () => {
     });
 
     it("Delete persona", () => {
+      cy.wait(500);
       cy.get("table")
         .find("tr")
         .its("length")
@@ -30,6 +31,11 @@ context("Delete persona", () => {
             .contains("tr", "Paco_delete")
             .find("[data-cy=delete-button]")
             .click();
+
+          // Esperar a que la fila de la persona eliminada desaparezca
+          cy.get("table").contains("tr", "Paco_delete").should("not.exist");
+
+          // Verificar que la tabla tiene una fila menos
           cy.get("table")
             .find("tr")
             .should("have.length", intialLength - 1);

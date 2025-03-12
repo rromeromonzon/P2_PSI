@@ -9,9 +9,14 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv(".env")
+
+print("DATABASE_URL:", os.getenv("DATABASE_URL"))
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7vd-jreiba2e6!$=7o#u=i299c65g(r4ezuy8)lnl0&2t4x4%%'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 
 # Application definition
@@ -78,26 +83,12 @@ WSGI_APPLICATION = 'persona.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# Configurar la base de datos
 import dj_database_url
-
+DATABASES = os.getenv('DATABASE_URL')
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://p2_PSI_persona_owner:npg_WBAKG1loHL9x@ep-flat-morning-a8v4srch-pooler.eastus2.azure.neon.tech/p2_PSI_persona',
-        conn_max_age=500
-    )
+    'default': dj_database_url.parse(DATABASES)
 }
-
-if not DATABASES['default']:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('PGDATABASE', 'p2_PSI_persona'),
-            'USER': os.getenv('PGUSER', 'p2_PSI_persona_owner'),
-            'PASSWORD': os.getenv('PGPASSWORD', 'npg_WBAKG1loHL9x'),
-            'HOST': os.getenv('PGHOST', 'ep-flat-morning-a8v4srch-pooler.eastus2.azure.neon.tech'),
-            'PORT': '5432',
-        }
-    }
 
 
 
@@ -142,10 +133,17 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Para Vue con Vite
-    "http://localhost:8080",  # Para Vue CLI (por si lo usas en otro momento)
-]
+CORS_ALLOWED_ORIGINS = [ origin.strip() for origin in os.getenv('CORS_ALLOWED_ORIGINS', '').split(',') if origin.strip() ]
 
 CORS_ALLOW_CREDENTIALS = True  # Permite el uso de credenciales si es necesario
 
+print("DATABASE_URL:", DATABASES)
+
+CORS_ORIGIN_WHITELIST = ['']
+CORS_ORIGIN_WHITELIST = ['']
+CORS_ORIGIN_WHITELIST = ['']
+CORS_ORIGIN_WHITELIST = ['']
+CORS_ORIGIN_WHITELIST = ['']
+CORS_ORIGIN_WHITELIST = ['']
+CORS_ORIGIN_WHITELIST = ['']
+CORS_ORIGIN_WHITELIST = ['']

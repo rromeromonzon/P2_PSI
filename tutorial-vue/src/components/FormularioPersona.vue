@@ -73,7 +73,7 @@
               class="alert alert-danger"
               role="alert"
             >
-              Debes rellenar todos los campos!
+              Debes rellenar todos los campos correctamente!
             </div>
             <div v-if="correcto" class="alert alert-success" role="alert">
               La persona ha sido agregada correctamente!
@@ -104,7 +104,10 @@ const persona = ref({
 
 const nombreInvalido = computed(() => persona.value.nombre.length < 1);
 const apellidoInvalido = computed(() => persona.value.apellido.length < 1);
-const emailInvalido = computed(() => persona.value.email.length < 1);
+const emailInvalido = computed(() => {
+  const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  return !regex.test(persona.value.email);
+});
 
 const procesando = ref(false);
 const correcto = ref(false);
