@@ -12,7 +12,7 @@ if [ ! -d "env" ]; then
     python3 -m venv env
 fi
 
-# Activar el entorno virtual
+# Activar el entorno virtual en el entorno actual
 source env/bin/activate
 
 # Instalar dependencias de Python (Django y otras)
@@ -44,7 +44,6 @@ npm install
 
 # Configuración de CORS para Vue.js en Django
 echo "Configurando CORS..."
-# Esto depende de que tengas instalado django-cors-headers y las configuraciones correspondientes en settings.py
 pip install django-cors-headers
 
 # Agregar CORS_ORIGIN_WHITELIST al archivo settings.py si no está presente
@@ -54,16 +53,19 @@ echo "CORS_ORIGIN_WHITELIST = ['${VUE_URL}']" >> ../persona/persona/settings.py
 echo "Instalando dependencias de la base de datos..."
 pip install psycopg2
 
-# Iniciar servidor de desarrollo Django
-echo "Iniciando servidor de desarrollo de Django..."
-cd ../persona
-python manage.py runserver 8001 > django.log 2>&1 &
+#servidores
+echo ""
+echo "Abre una terminal dandole al mas arriba a la izquierda de la ventana de la terminal y escribe lo siguiente:"
+echo "source env/bin/activate && cd persona && python manage.py runserver 8001"
 
-# Iniciar servidor de desarrollo Vue.js
-echo "Iniciando servidor de desarrollo de Vue.js..."
-cd ../tutorial-vue
-npm run dev > vue.log 2>&1 &
-
+echo ""
+echo "Abre otra terminal de la misma manera y escribe lo siguiente:"
+echo "source env/bin/activate && cd tutorial-vue && npm run dev"
 # Finalización
+echo ""
 echo "Todo configurado. El proyecto está corriendo en local."
-echo "Revisa el vue.log dentro de tutorial-vue y el django.log dentro de persona para ver si estan corriendo correctamente y en que puertos estan corriendo"
+echo "Revisa las terminales abiertas para ver en qué puertos están corriendo Django y Vue.js."
+echo ""
+echo "Aparte, puedes acceder a estos links de render con su despliegue en esta plataforma: "
+echo "https://p2-psi-yraj.onrender.com/             https://p2-psi-server.onrender.com"
+echo "(la parte de poner la api en render no hemos conseguido sacarla y render ha dado errores de última hora y no nos da tiempo a encontrar el error ahora mismo)"

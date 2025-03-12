@@ -33,7 +33,7 @@ export const useCounterStore = defineStore("counter", {
         COUNTER_LOCAL_STORAGE_KEY,
         JSON.stringify(this.count)
       );
-    }
+    },
   },
 });
 

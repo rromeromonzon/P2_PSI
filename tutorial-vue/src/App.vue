@@ -16,8 +16,11 @@
         <div v-else>
           <table class="table"></table>
         </div>
-        <tabla-personas :personas="personas" @delete-persona="eliminarPersona"
-          @actualizar-persona="actualizarPersona" />
+        <tabla-personas
+          :personas="personas"
+          @delete-persona="eliminarPersona"
+          @actualizar-persona="actualizarPersona"
+        />
       </div>
     </div>
   </div>
