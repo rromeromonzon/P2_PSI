@@ -31,7 +31,7 @@ USER_EXISTS=$(python manage.py shell -c "from django.contrib.auth.models import 
 
 if [ "$USER_EXISTS" == "False" ]; then
     echo "Creando superusuario 'alumnodb'..."
-    echo "from django.contrib.auth.models import User; User.objects.create_superuser('alumnodb', 'admin@example.com', 'tu_contraseña')" | python manage.py shell
+    echo "from django.contrib.auth.models import User; User.objects.create_superuser('alumnodb', 'admin@example.com', 'alumnodb')" | python manage.py shell
 else
     echo "El superusuario 'alumnodb' ya existe."
 fi
@@ -66,4 +66,4 @@ npm run dev > vue.log 2>&1 &
 
 # Finalización
 echo "Todo configurado. El proyecto está corriendo en local."
-echo "Accede a Django en http://127.0.0.1:8001 y a Vue.js en http://localhost:5173"
+echo "Revisa el vue.log dentro de tutorial-vue y el django.log dentro de persona para ver si estan corriendo correctamente y en que puertos estan corriendo"
